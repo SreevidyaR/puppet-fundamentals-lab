@@ -12,6 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
+
   config.vm.box = "opscode-ubuntu-1404-i386"
    if Vagrant.has_plugin?("vagrant-proxyconf")
     config.proxy.http     = "http://172.21.4.10:3128/"
@@ -19,6 +20,9 @@ Vagrant.configure(2) do |config|
     config.proxy.no_proxy = "localhost,127.0.0.1"
   end
 
+  config.vm.provision :shell, :inline => "sudo apt-get install ntp -y"
+
+  config.vm.provision :shell, :inline => "sudo service ntp restart"
 
   config.vm.provision :shell, :inline => "wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb >/dev/null 2>&1"
 
@@ -40,6 +44,8 @@ Vagrant.configure(2) do |config|
 
 
    config.vm.define :puppetmaster do |vm_config|
+    vm_config.vm.hostname = "puppetmaster.cts.com"
+    vm_config.vm.network "forwarded_port", guest: 8140, host: 8140
     vm_config.vm.provision :shell, :inline => "sudo apt-get install puppetserver -y >/dev/null 2>&1"
 
     vm_config.vm.provision :shell, :inline => "sudo service puppetserver start"
