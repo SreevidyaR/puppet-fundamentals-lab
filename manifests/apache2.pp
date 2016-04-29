@@ -8,3 +8,10 @@ service { 'apache2':
   enable => true,
 }
 
+
+
+file { 'customepage':
+  path    => '/var/www/html/index.html',
+  content => 'Tomorrow is another day',
+}
+
