@@ -51,7 +51,12 @@ Vagrant.configure(2) do |config|
     vm_config.vm.provision :shell, :inline => "sudo service puppetserver start"
    end
 
+   config.vm.define :puppet_enterprise do |vm_config|
+    vm_config.vm.hostname = "puppet-enterprise.cts.com"
+   end
+
    config.vm.define :apache2 do |vm_config|
+    vm_config.vm.hostname = "apache2.cts.com"
 
    end
 
