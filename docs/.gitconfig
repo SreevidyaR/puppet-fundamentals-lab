@@ -1,0 +1,9 @@
+[user]
+	name = mohisethi
+	email = mohit@sethis.in
+[http]
+	proxy = squid:3128
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
