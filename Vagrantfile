@@ -59,6 +59,7 @@ Vagrant.configure(2) do |config|
 
    config.vm.define :apache2 do |vm_config|
     vm_config.vm.hostname = "apache2.cts.com"
+    vm_config.vm.network "forwarded_port", guest: 80, host: 80
 
    end
 
