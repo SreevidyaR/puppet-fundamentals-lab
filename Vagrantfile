@@ -22,6 +22,8 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision :shell, :inline => "sudo apt-get install ntp -y"
 
+  config.vm.provision :shell, :inline => "sudo apt-get install vim -y"
+
   config.vm.provision :shell, :inline => "sudo service ntp restart"
 
   config.vm.provision :shell, :inline => "wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb >/dev/null 2>&1"
