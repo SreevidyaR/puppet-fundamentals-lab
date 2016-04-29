@@ -20,6 +20,13 @@ Vagrant.configure(2) do |config|
   end
 
 
+  config.vm.provision :shell, :inline => "wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb >/dev/null 2>&1"
+
+
+  config.vm.provision :shell, :inline => "sudo dpkg -i puppetlabs-release-pc1-trusty.deb >/dev/null 2>&1"
+
+  config.vm.provision :shell, :inline => "sudo apt-get update -y >/dev/null 2>&1"
+
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", 3072] 
     # vb.gui = true
@@ -33,7 +40,9 @@ Vagrant.configure(2) do |config|
 
 
    config.vm.define :puppetmaster do |vm_config|
+    vm_config.vm.provision :shell, :inline => "sudo apt-get install puppetserver -y >/dev/null 2>&1"
 
+    vm_config.vm.provision :shell, :inline => "sudo service puppetserver start"
    end
 
    config.vm.define :apache2 do |vm_config|
