@@ -31,6 +31,15 @@ Vagrant.configure(2) do |config|
      vb.customize ["modifyvm", :id, "--nictype1", "Am79C973"]
    end
 
+
+   config.vm.define :puppetmaster do |vm_config|
+
+   end
+
+   config.vm.define :apache2 do |vm_config|
+
+   end
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
